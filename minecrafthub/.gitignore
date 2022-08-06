@@ -1,0 +1,12 @@
+**/__pycache__/
+**/migrations
+.idea
+db.sqlite3
+**/media
+media
+**/*.log
+*.env
+**/locustfiles/
+**/static/
+!**/static/js/
+!**/static/images/

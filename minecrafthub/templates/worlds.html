@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+        {% block content %}
+    <div class="overflow-x-hidden" style="background-image:url({% static 'images/back.jpg' %})">
+        <div class="container flex justify-between mx-auto">
+            <div class="w-full lg:w-8/12">
+                <div id="post" class="m-6">
+                    {% include "post.html" %}
+                </div>
+                <button type="button" class="flex mx-auto mt-4 mb-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" id="load">
+                        Load More
+                </button>
+                <div class="hidden justify-center mx-auto mb-4 text-gray-200" id="spinner">
+                    <button type="button" class="flex mx-auto mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" id="load">
+                        Loading<svg version="1.1" stroke="white" stroke-width="6" id="ios7_x5F_arrows_1_" xmlns="http://www.w3.org/2000/svg" x="0" y="0" class="ml-1 w-6 h-6 animate-spin" viewBox="0 0 128 128" style="enable-background:new 0 0 128 128" xml:space="preserve"><style>.st0{display:none}.st1{display:inline}</style><g id="_x32_7_1_"><path d="m126 15.2-5-1.3-9.4 35.2-35.2-9.5-1.3 5.1 40.1 10.7h.1z" id="_x33__28_"/><path d="M54.6 80.2 18.8 68.4l-5-1.6-13 40.1 5 1.7 11.3-35.1L53 85.2z" id="_x32__27_"/><path d="M65.2 18.3c21.8 0 40.1 15.3 44.7 35.7h5.2c-4.7-23.3-25.3-40.8-49.9-40.8-23.7 0-43.7 16.3-49.3 38.3h5.3c5.5-19.2 23.1-33.2 44-33.2zm0 91.9c-22.7 0-41.6-16.6-45.2-38.3h-5.2c3.7 24.6 24.8 43.4 50.4 43.4 22.8 0 42.1-15 48.6-35.7h-5.4c-6.2 17.8-23.2 30.6-43.2 30.6z" id="_x31__27_"/></g></svg>
+                    </button>
+                </div>
+                <div class="hidden mt-4 mb-4 ml-7 lg:ml-14 bg-grey-100 border-l-4 border-orange-500 text-black-700 p-4" role="alert" id="alert">
+                    <p class="font-bold text-red-700">You're all caught up!</p>
+                </div>
+            </div>
+            <div class="hidden w-4/12 pt-5 -mx-3 lg:block">
+                <div class="px-8 mt-2">
+                    <div class="flex flex-col max-w-sm mx-auto bg-white rounded-lg shadow-md">
+                        <div class="flex items-center justify-center">
+                            <button class="flex justify-center m-20">Ads Block</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src=" {% static 'js/load_more.js' %} "></script>
+        {% endblock content %}

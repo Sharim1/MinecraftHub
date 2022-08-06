@@ -1,0 +1,26 @@
+{% load static %}
+<footer style="background: url({% static 'images/header.jpg' %})" class="text-gray-600 body-font">
+    <div class="bg-linear-pink-invert py-6 px-2">
+      <div tabindex="0" aria-label="footer" class="focus:outline-none mx-auto container flex flex-col items-center justify-center">
+          <div tabindex="0" aria-label="prodify logo" role="img">
+             <img src=" {% static 'images/logo.png' %}" class="h-14 w-auto" alt="logo">
+          </div>
+          <div class="text-black flex flex-col md:items-center f-f-l">
+              <div class="my-3 text-base text-color f-f-l"> 
+                  <ul class="flex items-center">
+                    <li class="md:mr-6 mr-4 ml-4 cursor-pointer text-sm"><a href="{% url 'early' %}" class="text-gray-200 focus:outline-none focus:underline hover:text-gray-500">Videos </a></li>
+                    <li class="md:mr-6 mr-4 cursor-pointer text-sm"><a href="{% url 'mods' %}" class="text-gray-200 focus:outline-none focus:underline hover:text-gray-500">Mods </a></li>
+                    <li class="md:mr-6 mr-4 cursor-pointer text-sm"><a href="{% url 'worlds' %}" class="text-gray-200 focus:outline-none focus:underline hover:text-gray-500">Worlds </a></li>
+                    <li class="md:mr-6 mr-4 cursor-pointer text-sm"><a href="{% url 'privacy_policy' %}" class="text-gray-200 focus:outline-none focus:underline hover:text-gray-500">Privacy Policy </a></li>
+                    <li class="cursor-pointer text-sm"><a href="{% url 'contact' %}" class="text-gray-200 focus:outline-none focus:underline hover:text-gray-500">Contact Me </a></li>
+                </ul>
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="bg-black">
+      <div class="container mx-auto py-4 px-5 ">
+        <p class="text-gray-200 text-sm sm:text-xs text-center">© BulkyStar 2022 - All Right Reserved | Made with ❤️ by <a href="https://arcscode.com" class="text-cyan-600 font-extrabold">ArcsCode</a></p>
+      </div>
+    </div>
+  </footer>

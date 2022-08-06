@@ -1,0 +1,30 @@
+{% load static %}
+
+{% for obj in latest %}
+    <div class="mt-6 lg:mx-8 posts">
+        <div class="bg-gray-200 lg:flex lg:max-w-5xl p-1 shadow-xl bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 rounded-2xl">
+            <div class="lg:w-1/2">
+                <a href="{% url 'post_details' obj.slug %}">
+                <div class="h-64 w-auto bg-cover bg-center rounded-t-xl lg:rounded-bl-xl md:rounded-tr-xl sm:rounded-tr-xl lg:h-full" style="background-image:url({{ obj.thumbnail.url }})"></div></a>
+            </div>
+            <div class="bg-gray-100 px-4 py-2 rounded-b-xl lg:rounded-bl-xl md:rounded-tr-xl sm:rounded-tr-xl lg:max-w-5xl lg:w-1/2">
+                {% for cat in obj.Category.all %}
+                <p class="font-mono text-xs lg:text-sm">{{ cat }}</p>
+                {% endfor %}
+                <a href="{% url 'post_details' obj.slug %}"><h2 class="text-xl font-bold font-mono text-gray-800 md:font-mono lg:text-2xl">{{ obj.title }}</h2></a>
+                <p class="mt-4 font-mono text-gray-600 text-sm lg:text-md">{{ obj.overview }}</p>
+                <div class="mt-4 flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <p class="text-xs lg:text-sm pl-1 pr-2 mr-1">{{ obj.timestamp|timesince}} ago</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    </svg>
+                    <p class="text-xs lg:text-sm pl-1">{{ obj.comment_count }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endfor %}

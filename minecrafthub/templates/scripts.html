@@ -1,0 +1,29 @@
+{% load static %}
+<script>
+    document.getElementById("open").onclick = function() {
+    document.getElementById("open").classList.add("hidden");
+    document.getElementById("mydev").classList.remove("hidden");
+}
+    document.getElementById("close").onclick = function() {
+    document.getElementById("mydev").classList.add("hidden");
+    document.getElementById("open").classList.remove("hidden");
+}
+
+//discord popup
+
+function toggleModal(modalID) {
+  document.getElementById(modalID).classList.toggle("hidden");
+  document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
+  document.getElementById(modalID).classList.toggle("flex");
+  document.getElementById(modalID + "-backdrop").classList.toggle("flex");
+}
+
+//discord popup end
+
+
+
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js" defer></script>

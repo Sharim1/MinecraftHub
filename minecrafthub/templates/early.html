@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="px-4 mx-auto pb-10" style="background-image:url({% static 'images/back.jpg' %})">
+      <h1 class="text-center text-xl lg:text-3xl font-bold p-10">Latest Videos</h1>
+      <div id="early_access_container">
+
+          {% include "latest_videos.html" %}
+    </div>
+  </div>
+  <script type="text/javascript" src=" {% static 'js/latest_videos.js' %} "></script>
+{% endblock content %}

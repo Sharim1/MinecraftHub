@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="overflow-x-hidden" style="background-image:url({% static 'images/back.jpg' %})">
+<div class="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
+  <div class="max-w-lg mx-auto">
+    <h1 class="text-2xl font-bold text-center text-indigo-600 sm:text-3xl">Get In Touch</h1>
+
+    <p class="max-w-md mx-auto mt-4 text-center text-gray-500">
+      Something you wanna talk about? Get in touch with me by filling the form below.
+    </p>
+
+    <form action="{% url 'contact-form' %}" id="contact-form" method="POST" class="p-8 mt-6 mb-0 space-y-4 rounded-lg shadow-2xl">
+      {% csrf_token %}
+      <div>
+        <label for="name" class="text-sm font-medium">Name</label>
+
+        <div class="relative mt-1">
+          <input
+            type="name"
+            id="name"
+            name="name"
+            class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
+            placeholder="Enter Name"
+          />
+        </div>
+      </div>
+
+
+      <div>
+        <label for="email" class="text-sm font-medium">Email</label>
+
+        <div class="relative mt-1">
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
+            placeholder="Enter Email"
+            required
+          />
+        </div>
+      </div>
+
+      <div>
+        <label for="message" class="text-sm font-medium">Message</label>
+
+        <div class="relative mt-1">
+          <textarea name="message" placeholder="Enter Message" id="message" class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"></textarea>
+        </div>
+      </div>
+
+      <span id="form-alert" class="font-medium flex justify-center"></span>
+
+      <button type="submit" name="submit" class="block w-full px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-lg">
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
+</div>
+<script src=" {% static 'js/scripts.js' %} "></script>
+{% endblock content %}

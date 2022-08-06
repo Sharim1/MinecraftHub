@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load social_share %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="fixed bottom-0 left-0 z-10 mb-2 ml-2">
+    <button id="shareicon" onclick="toggleshare('share-id')" class="float-left cursor-pointer h-14 rounded-full w-14 hover:bg-blue-700 bg-blue-500 flex items-center justify-center focus:outline-none"><i class='bx bxs-share-alt text-2xl text-white'></i></button>
+    <div id="share_icons" class="absolute opacity-0 ml-6 mt-6">
+      <span class="absolute flex items-center justify-center h-9 w-9 rounded-full bg-blue-500 text-white -top-14 left-8 cursor-pointer">{% post_to_twitter "{{ blog.title }}" object_or_url "<i class='bx bxl-twitter pt-1 bx-sm'></i>" %}</span>
+      <span class="absolute flex items-center justify-center h-9 w-9 rounded-full bg-blue-500 text-white -top-3 left-12 cursor-pointer">{% post_to_telegram "{{ blog.title }}" object_or_url "<i class='bx bxl-telegram pt-1 bx-sm'></i>" %}</span>
+      <span class="absolute flex items-center justify-center h-9 w-9 rounded-full bg-blue-500 text-white bottom-11 -left-2 cursor-pointer">{% post_to_whatsapp object_or_url "<i class='bx bxl-whatsapp pt-1 bx-sm'></i>" %}</span>
+    </div>
+</div>
+<section class="relative lg:py-20" style="background-image:url({% static 'images/back.jpg' %})">
+  <div class="container px-4 mx-auto mb-0 ">
+    <div class="w-full lg:w-1/2 pb-4">
+      <div class="flex flex-wrap lg:h-96 sm:max-w-lg ">
+        <h2 class="mb-8 mt-10 lg:mt-0 lg:mb-2 text-3xl leading-tight md:text-4xl md:leading-tight lg:text-5xl lg:leading-tight font-bold font-heading">{{ blog.title }}</h2>
+        <div class="flex items-center justify-center">
+          <div class="mr-6">
+            <img class="w-12 h-12 lg:w-16 lg:h-16 object-cover rounded-full" src="{% static 'images/icon.jpg' %}" alt="">
+          </div>
+          <div>
+            <h3 class="text-lg lg:text-2xl font-bold font-heading">Admin</h3>
+            <p class="text-sm lg:text-lg text-gray-600">{{ blog.timestamp}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div class="lg:absolute lg:top-0 lg:mt-20 lg:pl-8 lg:right-0 lg:w-1/2 h-46 lg:h-92">
+    {% if newlink %}
+    <div class="relative h-0 overflow-hidden max-w-full w-full" style="padding-bottom: 56.25%">
+      <iframe src="{{ newlink }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="absolute top-0 left-0 w-full h-full lg:w-5/6 lg:h-5/6 2xl:w-2/3 2xl:h-2/3 pb-10 2xl:pb-0"></iframe>
+    </div>
+    {% else %}
+    <img class="h-full w-full ml-auto object-cover lg:rounded-l-xl" src="{{ blog.thumbnail.url }}" alt="">
+    {% endif %}
+  </div>
+</div>
+  <div class="container max-w-5xl mx-auto lg:mt-10">
+    <div class="mx-0 sm:mx-6">
+      <div class="bg-white w-full p-8 md:p-14 text-xl md:text-2xl text-gray-800 leading-normal" style="font-family:Georgia,serif;">
+        {{ blog.content | safe }}
+
+        <!-- Download Button Starts Here -->
+        {% if blog.upload_file %}
+        <a href="{{ blog.upload_file.url }}" download="">
+          <div class="flex items-center justify-center"> <button class="transition duration-500 font-mono border-0 text-lg h-12 w-36 bg-red-500 hover:bg-red-700 text-white mt-2 px-3 rounded-md"> <span>Download</span> <i class='bx bx-down-arrow-alt animate-bounce text-xl'></i></button>
+          </div>
+        </a>
+      {% endif %}
+      <!-- Download button ends here -->
+
+      <hr class="h-2 bg-gray-300 mt-3">
+      <div class="col-md-8 card mb-4  mt-3 ">
+        <div class="card-body">
+            <!-- comments -->
+            {% with comments.count as total_comments %}
+                <h2 class="font-sans text-2xl font-semibold tracking-wider py-2 bg-white text-gray-900">{{ total_comments }} Comments</h2>
+            {% endwith %}
+            {% for comment in comments %}
+                <div class="flex my-3">
+                  <div class="flex-shrink-0 mr-3 mt-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="42" height="42" viewBox="0 0 48 48" style=" fill:#000000;"><path fill="#FFCC80" d="M6 6H42V42H6z"></path><path fill="#5D4037" d="M6 6H11V18H6z"></path><path fill="#5D4037" d="M6 6H42V13H6z"></path><path fill="#5D4037" d="M37 6H42V18H37z"></path><path fill="#F57C00" d="M20 26H28V30H20z"></path><path fill="#1565C0" d="M16 22H20V26H16zM28 22H32V26H28z"></path><g><path fill="#FFF" d="M12 22H16V26H12zM32 22H36V26H32z"></path></g><g><path fill="#795548" d="M14 30H18V38H14zM30 30H34V38H30z"></path><path fill="#795548" d="M16 34H32V38H16z"></path></g></svg>
+                  </div>
+                  <div class="font-sans flex-1 border rounded-lg px-2 py-1 leading-relaxed max-w-[75vw] break-words">
+                    <strong class="text-lg">{{ comment.name }}</strong>
+                    <span class="font-sans text-xs text-gray-400">{{ comment.created_on }}</span>
+                    <div class="font-sans text-lg">{{ comment.body | linebreaks }}</div>
+                    <div class="flex space-x-4"></div>
+                    <div class="space-y-4">
+                    </div>
+                    {% if comment.reply %}
+                    <div class="mx-auto" x-data="{selected:null}">
+                      <div class="relative">
+                        <button type="button" class="w-30 text-left" @click="selected !== 1 ? selected = 1 : selected = null">
+                          <div class="flex items-center justify-between">
+                            <span class="text-blue-400 text-sm">Check reply from admin</span>
+                          </div>
+                        </button>
+                        <div class="relative overflow-hidden transition-all max-h-0 duration-700" style="" x-ref="container1" x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
+                            <div class="pl-6 py-3 text-lg">
+                                  {{ comment.reply }}
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                  {% endif %}
+                  </div>
+                </div>
+            {% endfor %}
+        </div>
+      </div>
+    <div class="col-md-8 card mb-4  mt-3 ">
+        <div class="card-body">
+            {% if new_comment %}
+                <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3" role="alert">
+                  <p class="font-bold font-mono">Your comment is awaiting approval</p>
+                </div>
+            {% else %}
+                <h3 class="font-sans">Leave a comment</h3>
+                <form method="post" style="margin-top: 1.3em;">
+                    {{ comment_form | crispy }}
+                    {% csrf_token %}
+                    <button type="submit" class="h-12 w-[150px] bg-blue-400 text-sm text-white rounded-lg transition-all cursor-pointer hover:bg-blue-600 mt-2">Submit Comment</button>
+                </form>
+            {% endif %}
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script type="text/javascript" src=" {% static 'js/blog.js' %} "></script>
+{% endblock content %}
